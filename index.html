@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo list</title>
+    <style>
+        body {
+            background: grey;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.6rem;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .app {
+            background: white;
+            padding: 30px;
+            border-radius: 30px;
+            width: 400px;
+        }
+        .list-container {
+            padding: 0 20px;
+        }
+
+        .list > * {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            background: yellowgreen;
+            font-size: 0.7rem;
+            border: unset;
+            color: black;
+            border-radius: 8px;
+        }
+
+        .delete-btn {
+            padding: 6 8px;
+            font-size: 0.5rem;
+            font-weight: 700px;
+            border-radius: 5px;
+        }
+
+        .btns-container {
+            margin-top: 30px;
+            display: flex;
+            gap: 10px;
+        }
+
+         .btns-container > * {
+            flex: 1 1;
+         }
+    </style>
+    </head>
+    <body>
+    <div class="app">
+        <h1>ToDo list</h1>
+        <div class="list-container">
+            <div class="list">
+                <div>Brot<button class="btn delete-btn">X</button></div>
+                <div>Salami<button class="btn delete-btn">X</button></div>
+                <div>Appel<button class="btn delete-btn">X</button></div>
+        </div>
+
+        <div class="btns-container">
+            <button class="btn" onclick="addItem()">ADD</button>
+            <button class="btn" onclick="clearList()">DELETE</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const list = document.getElementsByClassName("list")[0]
+        addDeleteHandlers()
+
+        function addItem() {
+         const  itemText = prompt("What to add?")
+         const item = document.createElement("div")
+         item.innerHTML =
+         `${itemText}<button class="btn delete-btn">X</button>`
+         list.appendChild(item)
+         item.querySelector(".delete-btn").addEventListener("click", deleteItem);
+        }
+
+        function clearList() {
+            list.innerHTML = ""
+        }
+
+        function deleteItem(event) {
+            event.target.parentElement.remove();
+        }
+
+        function addDeleteHandlers() {
+            const deleteButtons = document.getElementsByClassName ("delete-btn")
+            for (let i = 0; i < deleteButtons.length; i++) {
+                const deleteButton = deleteButtons[i];
+                deleteButton.addEventListener("click", deleteItem)
+            }
+        }
+    </script>
+</body>
+</html>
